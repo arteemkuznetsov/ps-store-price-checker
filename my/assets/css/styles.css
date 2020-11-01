@@ -1,0 +1,255 @@
+@font-face {
+    font-family: 'SST Roman';
+    font-style: normal;
+    font-weight: normal;
+    src: local('SST Roman'), url('../fonts/SSTRg.woff') format('woff');
+}
+
+
+@font-face {
+    font-family: 'SST Condensed';
+    font-style: normal;
+    font-weight: normal;
+    src: local('SST Condensed'), url('../fonts/SSTRgCn.woff') format('woff');
+}
+
+
+@font-face {
+    font-family: 'SST Italic';
+    font-style: normal;
+    font-weight: normal;
+    src: local('SST Italic'), url('../fonts/SSTRgIt.woff') format('woff');
+}
+
+
+@font-face {
+    font-family: 'SST Light';
+    font-style: normal;
+    font-weight: normal;
+    src: local('SST Light'), url('../fonts/SSTLight.woff') format('woff');
+}
+
+
+@font-face {
+    font-family: 'SST Light Italic';
+    font-style: normal;
+    font-weight: normal;
+    src: local('SST Light Italic'), url('../fonts/SSTLightIt.woff') format('woff');
+}
+
+
+@font-face {
+    font-family: 'SST Medium';
+    font-style: normal;
+    font-weight: normal;
+    src: local('SST Medium'), url('../fonts/SSTMedium.woff') format('woff');
+}
+
+
+@font-face {
+    font-family: 'SST Condensed Medium';
+    font-style: normal;
+    font-weight: normal;
+    src: local('SST Condensed Medium'), url('../fonts/SSTMediumCn.woff') format('woff');
+}
+
+
+@font-face {
+    font-family: 'SST Medium Italic';
+    font-style: normal;
+    font-weight: normal;
+    src: local('SST Medium Italic'), url('../fonts/SSTMediumIt.woff') format('woff');
+}
+
+
+@font-face {
+    font-family: 'SST Bold';
+    font-style: normal;
+    font-weight: normal;
+    src: local('SST Bold'), url('../fonts/SSTBold.woff') format('woff');
+}
+
+
+@font-face {
+    font-family: 'SST Condensed Bold';
+    font-style: normal;
+    font-weight: normal;
+    src: local('SST Condensed Bold'), url('../fonts/SSTBoldCn.woff') format('woff');
+}
+
+
+@font-face {
+    font-family: 'SST Bold Italic';
+    font-style: normal;
+    font-weight: normal;
+    src: local('SST Bold Italic'), url('../fonts/SSTBoldIt.woff') format('woff');
+}
+
+
+@font-face {
+    font-family: 'SST Heavy';
+    font-style: normal;
+    font-weight: normal;
+    src: local('SST Heavy'), url('../fonts/SSTHeavy.woff') format('woff');
+}
+
+
+@font-face {
+    font-family: 'SST Heavy Italic';
+    font-style: normal;
+    font-weight: normal;
+    src: local('SST Heavy Italic'), url('../fonts/SSTHeavyIt.woff') format('woff');
+}
+
+* {
+    font-family: 'SST Medium', serif;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+@-o-keyframes gamepadFlashing {
+    0%   { border-bottom-color: #0072ce; }
+    50%  { border-bottom-color: #c81b3a; }
+    100%   { border-bottom-color: #0072ce; }
+}
+
+@keyframes gamepadFlashing {
+    0%   { border-bottom-color: #0072ce; }
+    25%   { border-bottom-color: #0072ce; }
+    45%  { border-bottom-color: #c81b3a; }
+    55%  { border-bottom-color: #c81b3a; }
+    75%   { border-bottom-color: #0072ce; }
+    100%   { border-bottom-color: #0072ce; }
+}
+
+.header--animated {
+    -o-animation: gamepadFlashing 10s infinite linear;
+    animation: gamepadFlashing 10s infinite linear;
+}
+
+.page__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    min-width: 900px;
+    height: 64px;
+    border-bottom: solid 4px;
+}
+
+.header-inner {
+    display: flex;
+    justify-content: space-between;
+    width: inherit;
+}
+
+.side-block {
+    width: 25%;
+    padding: 1rem;
+}
+
+.header-inner__links {
+    min-width: 59%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.header-links__item {
+    padding: 0 16px;
+    height: 60px;
+    font-size: 15px;
+    border-bottom-style: solid;
+    border-top-style: solid;
+    border-top-width: 4px;
+    border-top-color: white;
+    border-bottom-width: 4px;
+    border-bottom-color: white;
+}
+
+/* #00439c - самый темный, #0089d8 - светлый */
+
+.header-links__item:hover {
+    color: #0072ce;
+}
+
+.content__search {
+    height: 148px;
+    width: 100%;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-box-shadow: inset 0 -2px 8px -2px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: inset 0 -2px 8px -2px rgba(0, 0, 0, 0.15);
+    box-shadow: inset 0 -2px 8px -2px rgba(0, 0, 0, 0.15);
+}
+
+.search-container {
+    display: flex;
+    flex-direction: row;
+    height: 64px;
+    width: max-content;
+    box-shadow: 0 0.05rem 0.3125rem 0 rgba(0, 0, 0, 0.5);
+}
+
+.search-text-box {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.search-text-box__input {
+    font-family: 'SST Light', serif;
+    background-color: white;
+    color: black;
+    padding: 8px 16px;
+    width: 380px;
+    height: inherit;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+.search-text-box__input:focus {
+    box-shadow: rgb(60, 174, 251) 0 0 5px 2px inset;
+}
+
+.search-text-box__button {
+    background-color: rgb(0, 114, 206);
+    width: 64px;
+    height: inherit;
+    cursor: pointer;
+    outline: none;
+    border: none;
+}
+
+.search-text-box__button:active {
+    box-shadow: rgb(60, 174, 251) 0 0 5px 2px inset;
+}
+
+.search-button__img {
+    width: 19px;
+    height: auto;
+}
+
+.content__search-results {
+    padding: 64px 67px;
+}
+
+.results__header {
+    color: #707070;
+    font: 42px 'SST Light';
+}
+
+.search-name--marked {
+    font-family: 'SST Light Italic', serif;
+    color: black;
+}
