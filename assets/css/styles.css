@@ -247,9 +247,100 @@ a {
 .results__header {
     color: #707070;
     font: 42px 'SST Light';
+    margin-left: 24px;
+    padding-bottom: 64px;
 }
 
 .search-name--marked {
     font-family: 'SST Light Italic', serif;
     color: black;
+}
+
+.results__section {
+    padding: 24px 0;
+}
+.results-section__list {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.results-list__item {
+    display: block;
+    width: 236px;
+    margin: 24px 24px 48px;
+}
+
+.results-item__img-container {
+    width: 236px;
+    height: auto;
+    position: relative;
+}
+
+.results-item__discount-label {
+    background-color: #c81b3a;
+    color: white;
+    width: max-content;
+    position: absolute;
+    padding: 3px;
+    bottom: 8px;
+    left: 8px;
+    font: 15px 'SST Roman';
+}
+
+.results-item__name {
+    font-size: 18px;
+    padding: 8px 0;
+}
+
+.results-item-prices  {
+    display: flex;
+    flex-direction: row;
+}
+
+.results-item-prices__default-price,
+.results-item-prices__discounted-price {
+    font: 18px 'SST Roman', serif;
+    padding-right: 8px;
+}
+
+.item-default-price--crossed-out {
+    color: #b8b8b8;
+    text-decoration: line-through;
+}
+
+.results-item__platforms-container {
+    padding: 8px 0;
+}
+
+.item-platforms-container__list {
+    display: flex;
+}
+
+.platforms-list__item {
+    border: solid 2px black;
+    padding: 2px;
+    width: max-content;
+    margin-right: 6px;
+    font: 10px 'SST Bold';
+}
+
+.platform--ps-vita {
+    background-color: rgba(31, 31, 31, 0.8);
+    color: white;
+    border-color: rgb(54, 54, 54);
+}
+
+.platform--ps3 {
+    border-color: rgba(31, 31, 31, 0.8);
+}
+
+.platform--ps4 {
+    background-color: rgba(31, 31, 31, 0.8);
+    color: white;
+    border-color: #0072ce;
+}
+
+.platform--ps5 {
+    border-color: #0072ce;
 }

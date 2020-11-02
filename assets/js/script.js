@@ -61,9 +61,3 @@ function search(name) {
     return false;
 }
 
-/*
-* если top_category == 'downloadable_game', то берем id.spit('-')[1] и подставляем в imageUrl
-* если top_category != 'downloadable_game', то делаем еще запрос по полю url и выбираем images[0].url
-*
-* */
-
