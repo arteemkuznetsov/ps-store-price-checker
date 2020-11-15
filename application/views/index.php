@@ -12,13 +12,13 @@
 <header class="page__header header header--animated">
     <div class="header__inner header-inner">
         <div class="header-inner__logo side-block">
-            <a href="/index.php">
+            <a href="./">
                 <img src="./assets/img/logo.png" alt="PS Price Tracker">
             </a>
         </div>
         <ul class="header-inner__links header-links">
             <li class="header-links__item header-link">
-                <a href="#">
+                <a href="./">
                     <div class="header-link__inner-text">Главная</div>
                 </a>
             </li>
@@ -29,7 +29,7 @@
             </li>
             <li class="header-links__item">
                 <a href="https://store.playstation.com/">
-                    <div class="header-link__inner-text">Playstation Store</div>
+                    <div class="header-link__inner-text">PlayStation Store</div>
                 </a>
             </li>
             <li class="header-links__item">

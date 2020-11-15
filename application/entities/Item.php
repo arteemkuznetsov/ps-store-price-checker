@@ -11,7 +11,6 @@ class Item
     public $id;
     public $name;
     public $displayDefaultPrice;
-    public $imageUrl;
     public $displayDiscountPrice;
     public $discountPercent;
     public $platforms;
@@ -33,13 +32,14 @@ class Item
             $this->displayDiscountPrice = $values["displayDiscountPrice"];
             $this->discountPercent = (int)$values["discountPercent"];
         }
-        $this->imageUrl = $values["imageUrl"];
         $this->platforms = $values["platforms"];
         $this->storeUrl = $values["storeUrl"];
         $this->detailUrl = $values["detailUrl"];
-        try {
-            $this->releaseDate = new \DateTime($values["releaseDate"]);
-        } catch (\Exception $ignored) {
+        if (isset($values["releaseDate"])) {
+            try {
+                $this->releaseDate = new \DateTime($values["releaseDate"]);
+            } catch (\Exception $ignored) {
+            }
         }
     }
 

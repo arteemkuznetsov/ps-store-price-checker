@@ -1,10 +1,5 @@
 <?php
 
-$anonymizeServices = [
-    "Cameleo" => "https://cameleo.xyz/r",
-    "NoBlockMe" => "http://noblockme.ru/go"
-];
-
 $platforms = [
     "PSP®" => [
         "name" => "PSP",
