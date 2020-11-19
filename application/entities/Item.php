@@ -2,6 +2,9 @@
 
 namespace Entities;
 
+use DateTime;
+use Exception;
+
 /**
  * Class Game or DLC title
  */
@@ -37,8 +40,8 @@ class Item
         $this->detailUrl = $values["detailUrl"];
         if (isset($values["releaseDate"])) {
             try {
-                $this->releaseDate = new \DateTime($values["releaseDate"]);
-            } catch (\Exception $ignored) {
+                $this->releaseDate = new DateTime($values["releaseDate"]);
+            } catch (Exception $ignored) {
             }
         }
     }

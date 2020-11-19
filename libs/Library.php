@@ -88,11 +88,13 @@ class Library
         return $values;
     }
 
-    public static function getDBConnection()
+    public static function getCurrentDirectory()
     {
-        $conn = (new DatabaseConnection())->open();
-
-        return ! $conn->connect_error ? $conn : false;
+        return basename(getcwd());
     }
 
+    public static function sendMail()
+    {
+
+    }
 }

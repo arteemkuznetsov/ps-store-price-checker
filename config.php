@@ -1,5 +1,14 @@
 <?php
 
+$ROOT = "/" . basename(__DIR__);
+
+$adminEmail = "arteemkuznetsov@gmail.com";
+
+$accountDirs = [
+    "signin",
+    "registration"
+];
+
 $platforms = [
     "PSP®" => [
         "name" => "PSP",
@@ -21,7 +30,7 @@ $platforms = [
         "css" => "platform--ps4",
         "available" => true
     ],
-    "PS5™" => [
+    "PS5" => [
         "name" => "PS5",
         "css" => "platform--ps5",
         "available" => true

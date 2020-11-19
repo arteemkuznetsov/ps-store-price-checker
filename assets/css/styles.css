@@ -195,6 +195,19 @@ a:hover {
     align-items: center;
 }
 
+.header-inner__right {
+    padding: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.header-inner__right > a {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
 .page__background {
     width: 100%;
     display: flex;
@@ -220,10 +233,14 @@ a:hover {
 }
 
 .background--top-shadow {
-    box-shadow: inset 0 4px 8px -2px rgba(0, 0, 0, 0.15);
+    box-shadow: inset 0 4px 8px -4px rgba(0, 0, 0, 0.15);
 }
 
-.search-container {
+.main-inner-form__button-container {
+    padding-top: 21px;
+}
+
+.input-container {
     display: flex;
     flex-direction: row;
     height: 64px;
@@ -231,7 +248,15 @@ a:hover {
     box-shadow: 0 0.05rem 0.3125rem 0 rgba(0, 0, 0, 0.5);
 }
 
-.search-text-box {
+.input-container--small-shadow {
+    box-shadow: 0 0.05rem 0.175rem 0 rgba(0, 0, 0, 0.5);
+}
+
+.input-container--contrasting {
+    border: rgba(0, 0, 0, 0.25) 1px solid;
+}
+
+.input-text-box {
     min-width: 380px;
     width: 760px;
     height: 100%;
@@ -239,7 +264,7 @@ a:hover {
     align-items: center;
 }
 
-.search-text-box__input {
+.input-text-box__input-element {
     font-family: 'SST Light', serif;
     background-color: white;
     color: black;
@@ -252,37 +277,90 @@ a:hover {
     font-size: 16px;
 }
 
-.search-text-box__input:focus {
+.input-text-box__input-element:focus {
     box-shadow: rgb(60, 174, 251) 0 0 5px 2px inset;
 }
 
-.search-text-box__button {
-    background-color: rgb(0, 114, 206);
-    width: 64px;
+.input-container--error {
+    border: #c81b3a 1px solid;
+}
+
+.main-inner-form__error {
+    padding-bottom: 21px;
+    color: #c81b3a;
+    display: none;
+    flex-direction: row;
+    width: 100%;
+}
+
+.error-message__img {
+    width: 32px;
+    height: auto;
+}
+
+.error-message__text {
+    display: flex;
+    height: 100%;
+    font: 16px 'SST Roman';
+    max-width: 718px;
+    padding-left: 16px;
+}
+
+.input-text-box__button-element {
     height: inherit;
     cursor: pointer;
     outline: none;
     border: none;
 }
 
-.search-text-box__button:active {
+.input-text-box__button-element:active {
     box-shadow: rgb(60, 174, 251) 0 0 5px 2px inset;
 }
 
-.search-button__img {
+.main-inner-form__button-container > .input-container {
+    margin-bottom: 10px;
+}
+
+.button-element--search {
+    background-color: rgb(0, 114, 206);
+    width: 64px;
+}
+
+.button-element--submit,
+.button-element--white {
+    width: 100%;
+}
+
+.button-element--submit {
+    background-color: #3E66D5;
+}
+
+.button-element--white {
+    background-color: white;
+    color: black;
+    border: rgb(200, 200, 200) 1px solid;
+}
+
+.button-element__img {
     width: 19px;
     height: auto;
 }
 
-.content__results {
-    padding: 64px 67px;
+.button-element__text {
+    font: 17px 'SST Roman';
 }
 
-.results__header {
-    color: #707070;
-    font: 42px 'SST Light';
-    margin-left: 24px;
-    padding-bottom: 64px;
+.button-element__text--white {
+    color: white;
+}
+
+.button-element__text--black {
+    color: black;
+}
+
+.content__main {
+    padding: 64px 67px;
+    background-color: white;
 }
 
 .search-name--marked {
@@ -290,7 +368,7 @@ a:hover {
     color: black;
 }
 
-.results__section {
+.main__section {
     padding: 24px 0;
 }
 .results-section__list {
@@ -499,4 +577,51 @@ a:hover {
 .footer-links-list__item {
     color: rgb(54, 54, 54);
     padding-top: 4px;
+}
+
+.main__header {
+    color: #707070;
+    font: 42px 'SST Light';
+    margin-left: 24px;
+    padding-bottom: 64px;
+}
+
+.main-header--central {
+    text-align: center
+}
+
+.main__inner {
+    display: flex;
+    justify-content: center;
+}
+
+.main-inner__form > .input-container,
+.main-inner__box > .input-container {
+    margin-bottom: 21px;
+}
+
+.main-inner-form__link {
+    margin-top: 13px;
+}
+
+.input-container--required:before {
+    position: absolute;
+    margin-left: 9px;
+    margin-top: 3px;
+    content: '*';
+    color: #c81b3a;
+}
+
+.main-inner-form__info,
+.main-inner-box__text {
+    margin-bottom: 16px;
+    font-family: 'SST Roman', serif;
+}
+
+.main-inner-form__info--red {
+    color: #c81b3a;
+}
+
+.main-inner-box__text {
+    width: 760px;
 }

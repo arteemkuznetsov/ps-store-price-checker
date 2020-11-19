@@ -19,16 +19,12 @@ if (isset($_GET["name"])) {
     }
 } else {
     $data = Library::request("https://store.playstation.com/chihiro-api/viewfinder/RU/ru/999/STORE-MSF75508-GAMESPOPULAR");
-    /*echo "<pre>";
-    print_r($data);
-    echo "</pre>";*/
-    foreach ($data["links"] as $result) {
-        $values = Library::initItemParams($result);
-        $itemCollection[] = new Item($values);
+    if ($data !== null) {
+        foreach ($data["links"] as $result) {
+            $values = Library::initItemParams($result);
+            $itemCollection[] = new Item($values);
+        }
     }
 }
-
-// most popular
-// https://store.playstation.com/chihiro-api/viewfinder/RU/ru/999/STORE-MSF75508-GAMESPOPULAR
 
 require_once './application/views/index.php';

@@ -1,7 +1,19 @@
 document.cookie += ';SameSite=None;SameSite=Secure';
 
-async function ajax(url) {
+async function ajaxGet(url) {
     const response = await fetch(url);
+    if (response.ok) {
+        return await response.json();
+    } else {
+        return false;
+    }
+}
+
+async function ajaxPost(url, data) {
+    const response = await fetch(url, {
+        method: 'POST',
+        body: data
+    });
     if (response.ok) {
         return await response.json();
     } else {
@@ -12,7 +24,7 @@ async function ajax(url) {
 let itemImages = document.getElementsByClassName('results-item-img-container__img');
 if (itemImages.length > 0) {
     for (let i = 0; i < itemImages.length; i++) {
-        ajax(itemImages[i].dataset.url)
+        ajaxGet(itemImages[i].dataset.url)
             .then(data => {
                 itemImages[i].src = data['images'][0]['url'];
                 itemImages[i].onerror = () => {
@@ -38,4 +50,16 @@ function addToWishlist(button) {
     } else {
         img.src = './assets/img/heart.png';
     }
+}
+
+function registerNewUser(form) {
+    ajaxPost('../application/ajax/registration.php', new FormData(form))
+        .then(data => {
+            console.log(data);
+            return false;
+        })
+        .catch(ignored => {
+            console.log(ignored)
+        });
+    return false;
 }
