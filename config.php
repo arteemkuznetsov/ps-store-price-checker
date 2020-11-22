@@ -3,12 +3,10 @@
 $ROOT = "/" . basename(__DIR__);
 
 $adminEmail = "arteemkuznetsov@gmail.com";
-
 $accountDirs = [
     "signin",
     "registration"
 ];
-
 $platforms = [
     "PSP®" => [
         "name" => "PSP",

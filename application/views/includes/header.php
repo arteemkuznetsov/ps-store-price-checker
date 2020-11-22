@@ -19,7 +19,7 @@
         </div>
         <ul class="header-inner__links header-links">
             <li class="header-links__item">
-                <a href="#">
+                <a href="<?= $ROOT ?>/wishlist/">
                     <div class="header-link__inner-text">Список желаемого</div>
                 </a>
             </li>
@@ -36,8 +36,22 @@
         </ul>
         <div class="header-inner__right side-block">
             <?php
-            if (! in_array(Library::getCurrentDirectory(), $accountDirs)): ?>
+            if (! in_array(Library::getCurrentDirectory(), $accountDirs) &&
+                ! $user->isAuth
+            ): ?>
                 <a href="<?= $ROOT ?>/signin/">Войти</a>
+            <?php
+            elseif ($user->isAuth): ?>
+                <a href="#"><?php
+                    if (isset($user->first_name) && $user->first_name != "") {
+                        echo $user->first_name;
+                    }
+                    if (isset($user->last_name) && $user->last_name != "") {
+                        echo " $user->last_name";
+                    } else {
+                        echo $user->login;
+                    }
+                    ?></a>
             <?php
             endif; ?>
         </div>
@@ -45,9 +59,9 @@
 </header>
 <div class="page__content">
     <?php
-    if (isset($isMainPage) && $isMainPage == true): ?>
+    if (! in_array(Library::getCurrentDirectory(), $accountDirs)): ?>
     <div class="page__background background--bottom-shadow background--top-area background--vertical-center">
-        <form action="./">
+        <form action="<?= $ROOT ?>/">
             <div class="input-container">
                 <div class="input-text-box">
                     <input class="input-text-box__input-element"
@@ -57,8 +71,8 @@
                            autocapitalize="off"
                            spellcheck="false"
                            type="search" id="input"
-                           value="<?= isset($_GET["name"]) ? $searchQuery
-                               : "" ?>"
+                           value="<?= isset($_GET["name"]) && $isMainPage
+                               ? $searchQuery : "" ?>"
                            required>
                     <button class="input-text-box__button-element button-element button-element--search"
                             type="submit">

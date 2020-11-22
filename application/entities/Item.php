@@ -20,6 +20,8 @@ class Item
     public $releaseDate;
     public $storeUrl;
     public $detailUrl;
+    public $img;
+    public $isInWishlist;
 
     /**
      * Item constructor.
@@ -37,7 +39,13 @@ class Item
         }
         $this->platforms = $values["platforms"];
         $this->storeUrl = $values["storeUrl"];
-        $this->detailUrl = $values["detailUrl"];
+        if (isset($values["detailUrl"])) {
+            $this->detailUrl = $values["detailUrl"];
+        }
+        if (isset($values["img"])) {
+            $this->img = htmlspecialchars($values["img"]);
+        }
+        $this->isInWishlist = $values["isInWishlist"];
         if (isset($values["releaseDate"])) {
             try {
                 $this->releaseDate = new DateTime($values["releaseDate"]);

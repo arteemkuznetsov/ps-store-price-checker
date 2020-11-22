@@ -1,6 +1,7 @@
 <?php
 
 require_once "../../config.php";
+require_once "../../libs/Library.php";
 require_once "../../libs/DatabaseConnection.php";
 
 $response = [
@@ -43,18 +44,31 @@ if (isset($_POST["login"]) &&
     $userData = [];
 
     foreach ($_POST as $name => $value) {
-        if (preg_match($regex[$name]["pattern"], $value) &&
-            strlen($value) >= $regex[$name]["min"] &&
-            strlen($value) <= $regex[$name]["max"]
-        ) {
-            $userData[$name] = htmlspecialchars($value);
+        if ($name != "first_name" && $name != "last_name") {
+            if (preg_match($regex[$name]["pattern"], $value) &&
+                strlen($value) >= $regex[$name]["min"] &&
+                strlen($value) <= $regex[$name]["max"]
+            ) {
+                $userData[$name] = htmlspecialchars($value);
+            }
+        } else {
+            if ($value != "") {
+                if (preg_match($regex[$name]["pattern"], $value) &&
+                    strlen($value) >= $regex[$name]["min"] &&
+                    strlen($value) <= $regex[$name]["max"]
+                ) {
+                    $userData[$name] = htmlspecialchars($value);
+                }
+            } else {
+                $userData[$name] = htmlspecialchars($value);
+            }
         }
     }
 
     // если все переданные поля прошли проверку
     if (sizeof($userData) == sizeof($_POST)) {
         $conn = new DatabaseConnection();
-        $pdo = $conn->open();
+
 
         $firstName = isset($userData["first_name"]) ? $userData["first_name"]
             : "";
@@ -64,16 +78,14 @@ if (isset($_POST["login"]) &&
         $email = $userData["email"];
         $password = password_hash($userData["password"], PASSWORD_BCRYPT);
         $hash = md5($login . time());
+        $secret = Library::generateUniqueKey($conn);
 
+        $result = $conn->query(
+            "SELECT count(*) AS count FROM users WHERE login = :login OR email = :email",
+            [$login, $email]
+        );
 
-        $selectStatement =
-            $pdo->prepare("SELECT count(*) FROM users WHERE login = :login OR email = :email");
-        $selectStatement->bindParam(":login", $login);
-        $selectStatement->bindParam(":email", $email);
-        $selectStatement->execute();
-        $count = $selectStatement->fetchColumn();
-
-        if ($count == 0) {
+        if ($result[0]->count == 0) {
             $link =
                 "http://localhost:63342/ps-store-parser/confirmed/?hash=$hash";
 
@@ -82,44 +94,48 @@ if (isset($_POST["login"]) &&
             $headers .= "To: <$email>\r\n";
             $headers .= "From: <$adminEmail>\r\n";
 
-            ob_start();
-            include "../views/includes/confirmation_email.php";
-            $html = ob_get_contents();
-            ob_get_clean();
+            $html =
+                Library::getView("../views/includes/confirmation_email.php");
 
-
-            $insertStatement = $pdo->prepare(
-                "INSERT INTO users (
+            if (@mail($email,
+                      "Подтвердите регистрацию на PS Price Tracker",
+                      $html,
+                      $headers)
+            ) {
+                $conn->query(
+                    "INSERT INTO users (
                    first_name, 
                    last_name, 
                    email, 
                    login, 
                    password, 
-                   hash)
+                   hash,
+                   secret_key)
                    VALUES (:first_name, 
                            :last_name, 
                            :email,
                            :login,
                            :password, 
-                           :hash)");
-            $insertStatement->bindParam(":first_name", $firstName);
-            $insertStatement->bindParam(":last_name", $lastName);
-            $insertStatement->bindParam(":email", $email);
-            $insertStatement->bindParam(":login", $login);
-            $insertStatement->bindParam(":password", $password);
-            $insertStatement->bindParam(":hash", $hash);
-
-            $isMailSent = mail($email,
-                               "Подтвердите регистрацию на PS Price Tracker",
-                               $html,
-                               $headers);
-
-            if ($isMailSent) {
-                $insertStatement->execute();
+                           :hash,
+                           :secret_key)",
+                    [
+                        $firstName,
+                        $lastName,
+                        $email,
+                        $login,
+                        $password,
+                        $hash,
+                        $secret
+                    ]
+                );
                 $response["status"] = 1;
+            } else {
+                $response["errors"][] = [
+                    "code" => 3,
+                    "message" => "На данный момент мы не можем отправить вам письмо для активации аккаунта. Попробуйте позже. Просим прощения за неудобства."
+                ];
             }
-        }
-        else {
+        } else {
             $response["errors"][] = [
                 "code" => 2,
                 "message" => "Пользователь с такими данными уже существует."

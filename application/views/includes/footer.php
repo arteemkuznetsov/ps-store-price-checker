@@ -66,5 +66,10 @@
     </div>
 </footer>
 <script src="<?= $ROOT ?>/assets/js/common.js"></script>
+<?php
+if ($isMainPage): ?>
+    <script src="<?= $ROOT ?>/assets/js/async_img_loading.js"></script>
+<?php
+endif; ?>
 </body>
 </html>

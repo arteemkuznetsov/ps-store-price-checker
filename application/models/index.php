@@ -14,14 +14,14 @@ if (isset($_GET["name"])) {
     $data = Library::request($name);
 
     foreach ($data["categories"]["games"]["links"] as $result) {
-        $values = Library::initItemParams($result);
+        $values = Library::initSearchedItem($user, $result);
         $itemCollection[] = new Item($values);
     }
 } else {
     $data = Library::request("https://store.playstation.com/chihiro-api/viewfinder/RU/ru/999/STORE-MSF75508-GAMESPOPULAR");
     if ($data !== null) {
         foreach ($data["links"] as $result) {
-            $values = Library::initItemParams($result);
+            $values = Library::initSearchedItem($user, $result);
             $itemCollection[] = new Item($values);
         }
     }

@@ -281,10 +281,6 @@ a:hover {
     box-shadow: rgb(60, 174, 251) 0 0 5px 2px inset;
 }
 
-.input-container--error {
-    border: #c81b3a 1px solid;
-}
-
 .main-inner-form__error {
     padding-bottom: 21px;
     color: #c81b3a;
@@ -624,4 +620,12 @@ a:hover {
 
 .main-inner-box__text {
     width: 760px;
+}
+
+.results-section__empty {
+    padding: 14px 0;
+    font-size: 28px;
+    font-family: 'SST Light', serif;
+    color: #707070;
+    text-align: center;
 }

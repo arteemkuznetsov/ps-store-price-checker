@@ -1,17 +1,9 @@
 <?php
 
-require_once "./application/views/includes/header.php";
+require_once "../application/views/includes/header.php";
 ?>
-<?php
-if (! empty($_GET["name"])): ?>
-    <h2 class="main__header results-header">Вы искали: <em
-                class="results-header search-name search-name--marked"
-                id="item-name"><?= $searchQuery ?></em></h2>
-<?php
-else: ?>
-    <h2 class="main__header results-header">Популярное</h2>
-<?php
-endif; ?>
+    <h2 class="main__header results-header">Список желаемого
+        (<?= sizeof($itemCollection) ?>)</h2>
 <?php
 if (! empty($itemCollection)):?>
     <ul class="results-section__list results-list"
@@ -26,15 +18,13 @@ if (! empty($itemCollection)):?>
                                 onclick="addOrDeleteItem(this)"
                                 data-id="<?= $item->id ?>">
                             <img class="add-to-wishlist__img"
-                                 src="<?= $ROOT ?>/assets/img/<?= $item->isInWishlist
-                                     ? "heart_filled.png" : "heart.png" ?>"
+                                 src="<?= $ROOT ?>/assets/img/heart_filled.png"
                                  alt="Добавить">
                         </button>
                     <?php
                     endif; ?>
                     <a href="<?= $item->storeUrl ?>">
-                        <div class="layer-loading"></div>
-                        <img src="<?= $ROOT ?>/assets/img/loading.png"
+                        <img src="<?= $item->img ?>"
                              class="results-item-img-container__img"
                              data-url="<?= $item->detailUrl ?>"
                              alt="<?= $item->name ?>">
@@ -87,9 +77,11 @@ if (! empty($itemCollection)):?>
     </ul>
 <?php
 else: ?>
-    <div class="results-section__empty">По вашему запросу ничего не найдено.</div>
+    <div class="results-section__empty">Добавьте в свой список желаемого первую
+        игру или дополнение!
+    </div>
 <?php
 endif; ?>
 <?php
-require_once "./application/views/includes/footer.php";
+require_once "../application/views/includes/footer.php";
 ?>

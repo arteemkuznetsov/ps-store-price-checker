@@ -1,4 +1,5 @@
-document.cookie += ';SameSite=None;SameSite=Secure';
+//document.cookie += ';SameSite=None;SameSite=Secure';
+const ROOT = '/ps-store-parser';
 
 async function ajaxGet(url) {
     const response = await fetch(url);
@@ -21,45 +22,58 @@ async function ajaxPost(url, data) {
     }
 }
 
-let itemImages = document.getElementsByClassName('results-item-img-container__img');
-if (itemImages.length > 0) {
-    for (let i = 0; i < itemImages.length; i++) {
-        ajaxGet(itemImages[i].dataset.url)
-            .then(data => {
-                itemImages[i].src = data['images'][0]['url'];
-                itemImages[i].onerror = () => {
-                    itemImages[i].error = null;
-                    itemImages[i].src = './assets/img/not-found.png';
-                }
-                itemImages[i].onload = () => {
-                    itemImages[i].parentNode.querySelector('.layer-loading').style.display = 'none';
-                };
-            })
-            .catch(ignored => {
-            });
-    }
-}
-
-function addToWishlist(button) {
+function addOrDeleteItem(button) {
     // отсылаем JSON с id игры на сервер. если сервер вставил игру в БД и ответил "ок, такой игры не было" - закрашиваем сердечко
     let img = button.querySelector('img');
+    let titleId = button.dataset.id;
 
-    if (img.src.endsWith('assets/img/heart.png')) {
-        // собственно тут в скобках и будет проверка НЕ ПО КАРТИНКЕ, а по ответу сервера
-        img.src = './assets/img/heart_filled.png';
-    } else {
-        img.src = './assets/img/heart.png';
-    }
+    let formData = new FormData();
+    formData.append("title_id", titleId);
+
+    ajaxPost(`${ROOT}/application/ajax/ajax_add-delete-wishlist.php`, formData)
+        .then(data => {
+            if (parseInt(data["status"]) === 1) {
+                img.src = `${ROOT}/assets/img/heart_filled.png`;
+            }
+            else if (parseInt(data["status"]) === 2) {
+                img.src = `${ROOT}/assets/img/heart.png`;
+            }
+        })
+        .catch(ignored => {
+        })
 }
 
-function registerNewUser(form) {
-    ajaxPost('../application/ajax/registration.php', new FormData(form))
+function loginUser(form) {
+    ajaxPost(`${ROOT}/application/ajax/ajax_auth.php`, new FormData(form))
         .then(data => {
-            console.log(data);
+            if (parseInt(data['status']) === 0) {
+                alert('Ошибка входа.');
+            } else if (parseInt(data['status']) === 1) {
+                alert('Аутентификация выполнена успешно.');
+            }
             return false;
         })
         .catch(ignored => {
-            console.log(ignored)
+        })
+    return false;
+}
+
+function registerNewUser(form) {
+    ajaxPost(`${ROOT}/application/ajax/ajax_registration.php`, new FormData(form))
+        .then(data => {
+            if (parseInt(data['status']) === 0) {
+                document.getElementById('error_block').style.display = 'flex';
+                document.getElementById('error_text').innerHTML = '';
+                data['errors'].forEach(error => {
+                    document.getElementById('error_text').innerHTML += error['message'] + '<br>';
+                });
+            } else if (parseInt(data['status']) === 1) {
+                /* return true и написать <form action="/registered.php">, где будет написано "Активируйте учетную запись" */
+                alert('Подтвердите активацию аккаунта, перейдя по ссылке, которая была отправлена на адрес вашей электронной почту.')
+            }
+            return false;
+        })
+        .catch(ignored => {
         });
     return false;
 }

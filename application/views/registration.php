@@ -7,22 +7,17 @@ require_once "../application/views/includes/header.php";
     <div class="main__inner main-inner">
         <form class="main-inner__form main-inner-container" method="post"
               onsubmit="return registerNewUser(this)">
-            <!-- display:flex for .main-inner-form__error -->
+            <div class="main-inner-form__error error-message" id="error_block">
+                <span class="error-message__img">
+                    <img src="<?= $ROOT ?>/assets/img/warning.svg" alt="Error">
+                </span>
+                <div class="error-message__text" id="error_text"></div>
+            </div>
             <div class="main-inner-form__info">Отмеченные
                 <span class="main-inner-form__info--red">*</span> поля
                 обязательны для заполнения.
             </div>
-            <div class="main-inner-form__error error-message">
-                <span class="error-message__img">
-                    <img src="<?= $ROOT ?>/assets/img/warning.svg" alt="Error">
-                </span>
-                <div class="error-message__text">
-                    Введен неверный логин или пароль. Проверьте правильность
-                    введенных данных и повторите попытку.
-                </div>
-            </div>
-            <div class="main-inner__input-container input-container input-container--contrasting <?
-            //= "input-container--error" ?>">
+            <div class="main-inner__input-container input-container input-container--contrasting">
                 <div class="input-text-box">
                     <input class="input-text-box__input-element"
                            id="first_name"
@@ -38,8 +33,7 @@ require_once "../application/views/includes/header.php";
                     >
                 </div>
             </div>
-            <div class="main-inner__input-container input-container input-container--contrasting <?
-            //= "input-container--error" ?>">
+            <div class="main-inner__input-container input-container input-container--contrasting">
                 <div class="input-text-box">
                     <input class="input-text-box__input-element"
                            id="last_name"
@@ -55,8 +49,7 @@ require_once "../application/views/includes/header.php";
                     >
                 </div>
             </div>
-            <div class="main-inner__input-container input-container input-container--contrasting input-container--required <?
-            //= "input-container--error" ?>">
+            <div class="main-inner__input-container input-container input-container--contrasting input-container--required">
                 <div class="input-text-box">
                     <input class="input-text-box__input-element"
                            id="login"
@@ -75,8 +68,7 @@ require_once "../application/views/includes/header.php";
                     >
                 </div>
             </div>
-            <div class="main-inner__input-container input-container input-container--contrasting input-container--required <?
-            //= "input-container--error" ?>">
+            <div class="main-inner__input-container input-container input-container--contrasting input-container--required">
                 <div class="input-text-box">
                     <input class="input-text-box__input-element"
                            id="email"

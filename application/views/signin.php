@@ -4,7 +4,8 @@ require_once "../application/views/includes/header.php";
 ?>
     <h2 class="main__header main-header main-header--central">Авторизация</h2>
     <div class="main__inner main-inner">
-        <form action="./" class="main-inner__form main-inner-form">
+        <form action="./" class="main-inner__form main-inner-form" method="post"
+              onsubmit="return loginUser(this)">
             <!-- display:flex for .main-inner-form__error -->
             <div class="main-inner-form__error error-message">
                 <span class="error-message__img">
@@ -15,7 +16,7 @@ require_once "../application/views/includes/header.php";
                     введенных данных и повторите попытку.
                 </div>
             </div>
-            <div class="main-inner__input-container input-container input-container--contrasting <?//= "input-container--error" ?>">
+            <div class="main-inner__input-container input-container input-container--contrasting">
                 <div class="input-text-box">
                     <input class="input-text-box__input-element"
                            id="login"
